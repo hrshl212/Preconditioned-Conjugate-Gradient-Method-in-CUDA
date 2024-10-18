@@ -301,8 +301,8 @@ void solveCG_cuda(float* d_A, float* A_CSR, int* JA, int* IA, float* d_UD, int* 
 
 
         // preconditioner application: z = U^-1 L^-1 r
-        cusparseSpSV_solve(handle, CUSPARSE_OPERATION_NON_TRANSPOSE,
-						&alpha2, matL, vecB, vecX, CUDA_R_32F,
+        cusparseSpSV_solve(handle, CUSPARSE_OPERATION_TRANSPOSE,
+						&alpha2, matU, vecB, vecX, CUDA_R_32F,
 						CUSPARSE_SPSV_ALG_DEFAULT, spsvDescrL);
         cusparseSpSV_solve(handle, CUSPARSE_OPERATION_NON_TRANSPOSE,
 						&alpha2, matU, vecX, vecZ, CUDA_R_32F,
