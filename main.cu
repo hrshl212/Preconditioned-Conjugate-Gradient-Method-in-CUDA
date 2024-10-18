@@ -273,8 +273,8 @@ void solveCG_cuda(float* d_A, float* A_CSR, int* JA, int* IA, float* d_UD, int* 
 	size_t bufferSize = 0;
 	size_t stmp = 0;
 	float alpha2 = 1.0f;
-	cusparseSpSV_bufferSize(handle, CUSPARSE_OPERATION_NON_TRANSPOSE,
-							&alpha2, matL, vecB, vecX, CUDA_R_32F,
+	cusparseSpSV_bufferSize(handle, CUSPARSE_OPERATION_TRANSPOSE,
+							&alpha2, matU, vecB, vecX, CUDA_R_32F,
 							CUSPARSE_SPSV_ALG_DEFAULT, spsvDescrL, &stmp);
 	if (stmp > bufferSize)	bufferSize = stmp;
 
