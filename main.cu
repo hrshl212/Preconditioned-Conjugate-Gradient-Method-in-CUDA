@@ -83,15 +83,10 @@ __global__ void matVec2(float* ACSR, int* IA, int* JA, int* SIZE, float* b, floa
 		__syncthreads();
 		// Parallel reduction of result in shared memory for one warp
 		if (t_warp < 16) t_sum[threadIdx.x] += t_sum[threadIdx.x+16];
-		__syncthreads();
 		if (t_warp < 8) t_sum[threadIdx.x] += t_sum[threadIdx.x+8];
-		__syncthreads();
 		if (t_warp < 4) t_sum[threadIdx.x] += t_sum[threadIdx.x+4];
-		__syncthreads();
 		if (t_warp < 2) t_sum[threadIdx.x] += t_sum[threadIdx.x+2];
-		__syncthreads();
 		if (t_warp < 1) t_sum[threadIdx.x] += t_sum[threadIdx.x+1];
-		__syncthreads();
 		// first thread within warp contains desired y[row] result so write it to y
 		if (t_warp == 0)
 			out[row] = t_sum[threadIdx.x];
